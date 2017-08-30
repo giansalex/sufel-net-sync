@@ -1,0 +1,4 @@
+language: csharp
+solution: Sufel.Sync.sln
+script:
+  - xbuild /p:Configuration=Release Sufel.Sync/Sufel.Sync.csproj
