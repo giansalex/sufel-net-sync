@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Sufel.Sync</id>
+        <version>1.0.0</version>
+        <title>Sufel Sync</title>
+        <authors>Giancarlos Salas</authors>
+        <owners>Giansalex</owners>
+        <projectUrl>https://github.com/giansalex/sufel-net-sync</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Sufel Sync para sistemas de los emisores</description>
+        <language>es-PE</language>
+        <tags>sufel</tags>
+        <dependencies>
+            <dependency id="Newtonsoft.Json" version="9.0" />
+        </dependencies>
+    </metadata>
+</package>

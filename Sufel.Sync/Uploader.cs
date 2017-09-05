@@ -5,15 +5,26 @@ using Sufel.Sync.Utils;
 
 namespace Sufel.Sync
 {
+    /// <summary>
+    /// Class Uploader.
+    /// </summary>
     public class Uploader
     {
         private static Jwt _jwt = new Jwt();
 
+        /// <summary>
+        /// Gets the token.
+        /// </summary>
+        /// <value>The token.</value>
         public Jwt Token
         {
             get { return _jwt; }
         }
 
+        /// <summary>
+        /// Gets or sets the setting.
+        /// </summary>
+        /// <value>The setting.</value>
         public SufelSetting Setting { get; set; }
 
         /// <summary>

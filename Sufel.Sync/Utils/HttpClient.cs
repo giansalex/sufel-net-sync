@@ -4,12 +4,22 @@ using System.Text;
 
 namespace Sufel.Sync.Utils
 {
+    /// <summary>
+    /// Class HttpClient.
+    /// </summary>
     internal static class HttpClient
     {
+        /// <summary>
+        /// Posts the specified URL.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="data">The data.</param>
+        /// <param name="token">The token.</param>
+        /// <returns>System.String.</returns>
         public static string Post(string url, string data, string token = "")
         {
             var bytes = Encoding.UTF8.GetBytes(data); 
-            var http = (HttpWebRequest)WebRequest.Create("");
+            var http = (HttpWebRequest)WebRequest.Create(url);
             http.Method = "POST";
             http.ContentType = "application/json";
             http.ContentLength = bytes.Length;
