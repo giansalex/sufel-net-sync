@@ -34,10 +34,7 @@ namespace Sufel.Sync
         /// <param name="pdf"></param>
         public void Upload(byte[] xml, byte[] pdf)
         {
-            if (string.IsNullOrEmpty(_jwt.Token) || _jwt.Expire <= DateTime.Now)
-            {
-                Auth();
-            }
+            VerifyAuth();
 
             var obj = new JObject
             {
@@ -45,7 +42,28 @@ namespace Sufel.Sync
                 {"pdf", Convert.ToBase64String(pdf) }
             };
 
-            var url = Setting.Endpoint + "/api/company/add-document";
+            var url = CreateUrl("/api/company/add-document");
+            HttpClient.Post(url, obj.ToString(), _jwt.Token);
+        }
+
+        /// <summary>
+        /// Anula document in server.
+        /// </summary>
+        /// <param name="tipo"></param>
+        /// <param name="serie"></param>
+        /// <param name="correlativo"></param>
+        public void Anular(string tipo, string serie, string correlativo)
+        {
+            VerifyAuth();
+
+            var obj = new JObject
+            {
+                {"tipo", tipo },
+                {"serie", serie },
+                {"correlativo", correlativo }
+            };
+
+            var url = CreateUrl("/api/company/cancel-document");
             HttpClient.Post(url, obj.ToString(), _jwt.Token);
         }
 
@@ -55,7 +73,7 @@ namespace Sufel.Sync
         /// <returns></returns>
         public string Auth()
         {
-            var url = Setting.Endpoint + "/api/company/auth";
+            var url = CreateUrl("/api/company/auth");
             var obj = new JObject
             {
                 {"ruc", Setting.Ruc}, {"password", Setting.Password}
@@ -66,6 +84,19 @@ namespace Sufel.Sync
             _jwt.Expire = UnixTimeStampToDateTime((int)jwt["expire"]);
 
             return _jwt.Token;
+        }
+
+        private void VerifyAuth()
+        {
+            if (string.IsNullOrEmpty(_jwt.Token) || _jwt.Expire <= DateTime.Now)
+            {
+                Auth();
+            }
+        }
+
+        private string CreateUrl(string path)
+        {
+            return Setting.Endpoint + path;
         }
 
         private DateTime UnixTimeStampToDateTime(double unixTimeStamp)
