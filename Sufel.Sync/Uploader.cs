@@ -32,7 +32,8 @@ namespace Sufel.Sync
         /// </summary>
         /// <param name="xml"></param>
         /// <param name="pdf"></param>
-        public void Upload(byte[] xml, byte[] pdf)
+        /// <returns>xml and pdf links</returns>
+        public string[] Upload(byte[] xml, byte[] pdf)
         {
             VerifyAuth();
 
@@ -43,7 +44,11 @@ namespace Sufel.Sync
             };
 
             var url = CreateUrl("/api/company/add-document");
-            HttpClient.Post(url, obj.ToString(), _jwt.Token);
+            var json = HttpClient.Post(url, obj.ToString(), _jwt.Token);
+
+            var res = JObject.Parse(json);
+
+            return new []{ (string)res["xml"], (string)res["pdf"]};
         }
 
         /// <summary>
