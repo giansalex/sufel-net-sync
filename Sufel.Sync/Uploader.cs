@@ -43,7 +43,7 @@ namespace Sufel.Sync
                 {"pdf", Convert.ToBase64String(pdf) }
             };
 
-            var url = CreateUrl("/api/company/add-document");
+            var url = CreateUrl("/api/company/documents");
             var json = HttpClient.Post(url, obj.ToString(), _jwt.Token);
 
             var res = JObject.Parse(json);
@@ -68,8 +68,8 @@ namespace Sufel.Sync
                 {"correlativo", correlativo }
             };
 
-            var url = CreateUrl("/api/company/cancel-document");
-            HttpClient.Post(url, obj.ToString(), _jwt.Token);
+            var url = CreateUrl("/api/company/documents");
+            HttpClient.Patch(url, obj.ToString(), _jwt.Token);
         }
 
         /// <summary>

@@ -10,7 +10,7 @@ namespace Sufel.Sync.Utils
     internal static class HttpClient
     {
         /// <summary>
-        /// Posts the specified URL.
+        /// POST the specified URL.
         /// </summary>
         /// <param name="url">The URL.</param>
         /// <param name="data">The data.</param>
@@ -18,9 +18,26 @@ namespace Sufel.Sync.Utils
         /// <returns>System.String.</returns>
         public static string Post(string url, string data, string token = "")
         {
+            return Request("POST", url, data, token);
+        }
+
+        /// <summary>
+        /// PATCH the specified URL.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="data">The data.</param>
+        /// <param name="token">The token.</param>
+        /// <returns>System.String.</returns>
+        public static string Patch(string url, string data, string token = "")
+        {
+            return Request("PATCH", url, data, token);
+        }
+
+        public static string Request(string method, string url, string data, string token = "")
+        {
             var bytes = Encoding.UTF8.GetBytes(data); 
             var http = (HttpWebRequest)WebRequest.Create(url);
-            http.Method = "POST";
+            http.Method = method;
             http.ContentType = "application/json";
             http.ContentLength = bytes.Length;
             if (!string.IsNullOrEmpty(token))
