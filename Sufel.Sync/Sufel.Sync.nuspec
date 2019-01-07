@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Sufel.Sync</id>
-        <version>1.0.5</version>
+        <version>1.0.6</version>
         <title>Sufel Sync</title>
         <authors>Giancarlos Salas</authors>
         <owners>Giansalex</owners>
@@ -12,7 +12,7 @@
         <language>es-PE</language>
         <tags>sufel</tags>
         <dependencies>
-            <dependency id="Newtonsoft.Json" version="11.0" />
+            <dependency id="Newtonsoft.Json" version="10.0" />
         </dependencies>
     </metadata>
 </package>
