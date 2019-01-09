@@ -32,8 +32,12 @@ namespace Sufel.Sync.Tests
             }
             catch (WebException ex)
             {
-                var resp = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
-                TestContext.Out.WriteLine(resp);
+                var response = ex.Response?.GetResponseStream();
+                if (response != null)
+                {
+                    var resp = new StreamReader(response).ReadToEnd();
+                    TestContext.Out.WriteLine(resp);
+                }
             }
             catch (Exception e)
             {
