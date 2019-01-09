@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using NUnit.Framework;
 
 namespace Sufel.Sync.Tests
@@ -28,6 +29,11 @@ namespace Sufel.Sync.Tests
                 var result = uploader.Upload(xml, pdf);
 
                 Assert.AreEqual(2, result.Length);
+            }
+            catch (WebException ex)
+            {
+                var resp = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
+                TestContext.Out.WriteLine(resp);
             }
             catch (Exception e)
             {
