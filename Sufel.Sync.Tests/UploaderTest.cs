@@ -23,9 +23,16 @@ namespace Sufel.Sync.Tests
             var xml = File.ReadAllBytes(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "20123456789-01-F001-123.xml"));
             var pdf = File.ReadAllBytes(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "20123456789-01-F001-123.pdf"));
 
-            var result = uploader.Upload(xml, pdf);
+            try
+            {
+                var result = uploader.Upload(xml, pdf);
 
-            Assert.AreEqual(2, result.Length);
+                Assert.AreEqual(2, result.Length);
+            }
+            catch (Exception e)
+            {
+                TestContext.Out.WriteLine(e);
+            }
         }
     }
 }
